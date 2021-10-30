@@ -34,18 +34,11 @@ CREATE TABLE IF NOT EXISTS vaults (
 
 CREATE TABLE IF NOT EXISTS vaultkeeps (
   id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'primary key',
+  creatorId VARCHAR(255) NOT NULL comment 'creator ID',
   keepId INT NOT NULL COMMENT 'Foreign Key',
   vaultId INT NOT NULL COMMENT 'Foreign Key',
   FOREIGN KEY (keepId) REFERENCES keeps(id) ON DELETE CASCADE,
   FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
-CREATE TABLE IF NOT EXISTS profiles (
-  id int NOT NULL primary key AUTO_INCREMENT  COMMENT 'primary key',
-  creatorId VARCHAR(255) NOT NULL COMMENT 'Creator Id',
-  name VARCHAR(255) NOT NULL COMMENT 'Profile Name',
-  email VARCHAR(255) NOT NULL COMMENT 'Profile Email',
-  picture VARCHAR(255) NOT NULL COMMENT 'Profile Picture',
-  FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
-) default charset utf8 COMMENT '';
 

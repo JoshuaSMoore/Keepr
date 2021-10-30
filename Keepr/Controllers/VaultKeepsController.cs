@@ -27,7 +27,8 @@ namespace Keepr.Controllers
                 {
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
                 newVaultKeep.CreatorId = userInfo.Id;
-                VaultKeep createdVaultKeep = _vaultKeepsService.Post(newVaultKeep);
+                var createdVaultKeep = _vaultKeepsService.Post(newVaultKeep);
+                createdVaultKeep.Creator = userInfo;
                 return Ok(createdVaultKeep);
                 }
                 catch (System.Exception e)
@@ -36,11 +37,12 @@ namespace Keepr.Controllers
                 }
             }
             [HttpGet("{vaultKeepId}")]
-            public ActionResult<VaultKeep> GetById(int vaultKeepId)
+            public async Task<ActionResult<VaultKeep>> GetById(int vaultKeepId)
             {
                 try
                 {
-                    return Ok(_vaultKeepsService.GetById(vaultKeepId));
+                    Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                    return Ok(_vaultKeepsService.GetById(vaultKeepId, userInfo?.Id));
                 }
                 catch (System.Exception e)
                 {

@@ -15,51 +15,67 @@ namespace Keepr.Repositories
     {
       _db = db;
     }
-    public VaultKeep Create(VaultKeep vaultKeepData)
+    public VaultKeep Create(VaultKeep newVaultKeep)
     {
       string sql = @"
-      INSERT INTO vaultkeeps (keepId, vaultId)
-      VALUES (@KeepId, @VaultId);
+      INSERT INTO vaultkeeps (keepId, vaultId, creatorId)
+      VALUES (@KeepId, @VaultId, @CreatorId);
       SELECT LAST_INSERT_ID();";
-      var id = _db.ExecuteScalar<int>(sql, vaultKeepData);
-      vaultKeepData.Id = id;
-      return vaultKeepData;
+      var id = _db.ExecuteScalar<int>(sql, newVaultKeep);
+      newVaultKeep.Id = id;
+      return newVaultKeep;
     }
 
     public VaultKeep GetById(int vaultKeepId)
     {
       string sql = @"SELECT
-      *
-      FROM vaultkeeps 
-      WHERE v.id = @vaultKeepId;";
-      return _db.QueryFirstOrDefault<VaultKeep>(sql, new { vaultKeepId });
+      v.*,
+      a.*
+      FROM vaultkeeps v
+      JOIN accounts a on a.id = v.creatorId
+      WHERE id = @vaultKeepId;";
+      return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (v, a) => { v.Creator = a; return v; }, new { vaultKeepId }).FirstOrDefault();
     }
 
     public void Delete(int vaultKeepId)
     {
-      string sql = @"DELETE FROM vaultkeeps WHERE id = @id LIMIT 1";
-      var rowsAffected = _db.Execute(sql, new { id = vaultKeepId });
+      string sql = @"DELETE FROM vaultkeeps WHERE id = @vaultKeepId LIMIT 1";
+      var rowsAffected = _db.Execute(sql, new { vaultKeepId});
       if(rowsAffected == 0)
       {
         throw new Exception("No vaultkeep found with that id");
       }
     }
 
-    public List<VaultKeep> GetKeepsByVaultId(int vaultId)
+     public List<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
     {
-      string sql = @"
+      var sql = @"
       SELECT
       vk.*,
-      k.*
+      k.*,
+      v.*
       FROM vaultkeeps vk
       JOIN keeps k ON k.id = vk.keepId
-      WHERE vk.vaultId = @vaultId";
-
-      return _db.Query<VaultKeep, Keep, VaultKeep>(sql, (vk, k) =>
-      {
+      JOIN vaults v ON v.id = vk.vaultId
+      WHERE vk.vaultId = @vaultId;
+      ";
+      return _db.Query<VaultKeepViewModel, Keep, Vault, VaultKeepViewModel>(sql, (vk, k, v) => {
         vk.Keep = k;
+        vk.Vault = v;
         return vk;
-      }, new { vaultId }).ToList();
+      }, new { vaultId }, splitOn: "keepId, vaultId").ToList();
     }
   }
 }
+
+  //  vk.id as vaultKeepId,
+  //     vk.keepId as keepId,
+  //     vk.vaultId as vaultId,
+  //     k.creatorId as creatorId,
+  //     k.name as name,
+  //     k.description as description,
+  //     k.views as views,
+  //     k.shares as shares,
+  //     k.keeps as keeps,
+  //     k.img as img,
+  //     v.isPrivate as isPrivate

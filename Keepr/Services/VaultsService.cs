@@ -35,9 +35,9 @@ namespace Keepr.Services
      return _vaultsRepository.Get();
     }
 
-    public Vault Post(Vault vaultData)
+    public Vault Post(Vault newVaultKeep)
     {
-      return _vaultsRepository.Create(vaultData);
+      return _vaultsRepository.Create(newVaultKeep);
     }
 
     public void RemoveVault(int vaultId, string userId)
@@ -63,7 +63,7 @@ namespace Keepr.Services
         return _vaultsRepository.Edit(foundVault);
     }
 
-    public List<VaultKeep> GetKeepsByVaultId(int vaultId)
+    public List<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
     {
       return _vaultKeepsRepository.GetKeepsByVaultId(vaultId);
     }
