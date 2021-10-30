@@ -40,3 +40,12 @@ CREATE TABLE IF NOT EXISTS vaultkeeps (
   FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
+CREATE TABLE IF NOT EXISTS profiles (
+  id int NOT NULL primary key AUTO_INCREMENT  COMMENT 'primary key',
+  creatorId VARCHAR(255) NOT NULL COMMENT 'Creator Id',
+  name VARCHAR(255) NOT NULL COMMENT 'Profile Name',
+  email VARCHAR(255) NOT NULL COMMENT 'Profile Email',
+  picture VARCHAR(255) NOT NULL COMMENT 'Profile Picture',
+  FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
+) default charset utf8 COMMENT '';
+

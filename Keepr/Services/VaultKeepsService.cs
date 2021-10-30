@@ -37,5 +37,6 @@ namespace Keepr.Services
       }
       _vaultKeepsRepository.Delete(vaultKeepId);
     }
+    
   }
 }
