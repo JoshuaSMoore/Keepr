@@ -9,10 +9,12 @@ namespace Keepr.Services
   {
 
       private readonly VaultsRepository _vaultsRepository;
+      private readonly VaultKeepsRepository _vaultKeepsRepository;
 
-      public VaultsService(VaultsRepository vaultsRepository)
+      public VaultsService(VaultsRepository vaultsRepository, VaultKeepsRepository vaultKeepsRepository)
       {
           _vaultsRepository = vaultsRepository;
+          _vaultKeepsRepository = vaultKeepsRepository;
       }
     public Vault GetById(int vaultId, string id)
     {
@@ -59,6 +61,11 @@ namespace Keepr.Services
         foundVault.Description = editedVault.Description ?? foundVault.Description;
         foundVault.IsPrivate = editedVault.IsPrivate;
         return _vaultsRepository.Edit(foundVault);
+    }
+
+    public List<VaultKeep> GetKeepsByVaultId(int vaultId)
+    {
+      return _vaultKeepsRepository.GetKeepsByVaultId(vaultId);
     }
   }
 }

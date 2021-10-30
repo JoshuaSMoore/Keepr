@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS vaults (
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
-CREATE TABLE IF NOT EXISTS vault_keeps (
+CREATE TABLE IF NOT EXISTS vaultkeeps (
+  id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'primary key',
   keepId INT NOT NULL COMMENT 'Foreign Key',
   vaultId INT NOT NULL COMMENT 'Foreign Key',
   FOREIGN KEY (keepId) REFERENCES keeps(id) ON DELETE CASCADE,
