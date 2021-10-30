@@ -45,6 +45,7 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+       [HttpGet("{profileId}/vaults")]
         public ActionResult<List<Vault>> GetVaultsByProfile(string profileId)
     {
       try

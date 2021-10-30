@@ -29,16 +29,10 @@ namespace Keepr.Repositories
     public VaultKeep GetById(int vaultKeepId)
     {
       string sql = @"SELECT
-      v.*,
-      a.*
-      FROM vaultkeeps v
-      JOIN accounts a on a.id = v.CreatorId
-      WHERE v.id = @id;";
-      return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (v, a) =>
-      {
-        v.Creator = a;
-        return v;
-      }, new { vaultKeepId }).FirstOrDefault();
+      *
+      FROM vaultkeeps 
+      WHERE v.id = @vaultKeepId;";
+      return _db.QueryFirstOrDefault<VaultKeep>(sql, new { vaultKeepId });
     }
 
     public void Delete(int vaultKeepId)

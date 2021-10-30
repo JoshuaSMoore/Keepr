@@ -7,11 +7,12 @@ namespace Keepr.Services
   public class VaultKeepsService
   {
     private readonly VaultKeepsRepository _vaultKeepsRepository;
-    private readonly VaultsService _vaultsService;
+    private readonly VaultsRepository _vaultsRepository;
 
-    public VaultKeepsService(VaultKeepsRepository vaultKeepsRepository, VaultsRepository _vaultsService)
+    public VaultKeepsService(VaultKeepsRepository vaultKeepsRepository, VaultsRepository vaultsRepository)
     {
       _vaultKeepsRepository = vaultKeepsRepository;
+      _vaultsRepository = vaultsRepository;
     }
     public VaultKeep Post(VaultKeep vaultKeepData)
     {
@@ -20,12 +21,8 @@ namespace Keepr.Services
 
     public VaultKeep GetById(int vaultKeepId)
     {
-      VaultKeep foundVaultKeep = _vaultKeepsRepository.GetById(vaultKeepId);
-      if(foundVaultKeep == null)
-      {
-        throw new Exception("Invalid Id");
-      }
-      return foundVaultKeep;
+    return _vaultKeepsRepository.GetById(vaultKeepId);
+      
     }
 
     public void RemoveVaultKeep(int vaultKeepId, string userId)

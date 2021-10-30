@@ -33,8 +33,9 @@ namespace Keepr.Repositories
       *
       FROM
       accounts
+      WHERE id = @profileId;
       ";
-      return _db.Query<Profile>(sql, new { profileId }).FirstOrDefault();
+      return _db.QueryFirstOrDefault<Profile>(sql, new { profileId });
     }
         public List<Vault> GetVaultsByProfile(string profileId)
     {
@@ -42,7 +43,7 @@ namespace Keepr.Repositories
       SELECT
       *
       FROM vaults v
-      WHERE k.creatorId = @profileId
+      WHERE v.creatorId = @profileId
       ";
       return _db.Query<Vault>(sql, new { profileId }).ToList();
     }

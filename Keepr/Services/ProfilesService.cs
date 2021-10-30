@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
@@ -13,19 +12,16 @@ namespace Keepr.Services
       {
           _profilesRepository = profilesRepository;
       }
+
 public List<Keep> GetKeepByProfile(string profileId)
     {
       return _profilesRepository.GetKeepByProfile(profileId);
     }
-        public Profile Get(string profileId)
+public Profile Get(string profileId)
     {
-      Profile profile = _profilesRepository.Get(profileId);
-      if (profile == null)
-      {
-        throw new Exception("Profile not found");
-      }
-      return profile;
+      return _profilesRepository.Get(profileId);
     }
+
     public List<Vault> GetVaultsByProfile(string profileId)
     {
       return _profilesRepository.GetVaultsByProfile(profileId);
