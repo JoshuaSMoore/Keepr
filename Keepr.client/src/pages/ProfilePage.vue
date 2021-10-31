@@ -13,21 +13,41 @@
   </div>
   <div class="container-fluid">
     <div class="row justify-content-between">  
-    <h3> Vaults</h3>
+    <h3> Vaults
+       <i class="mdi mdi-plus text-primary selectable" data-bs-toggle="modal" data-bs-target="#create-vault"></i>
+    </h3>
     <ProfileVaults v-for="v in vaults" :key="v.id" :vault="v" class="col-md-2 shadow rounded m-3" />
     </div>
   </div>
   <div class="container-fluid">
     <div class="row justify-content-between">
-      <h3> Keeps</h3>
+      <h3> Keeps
+        <i class="mdi mdi-plus text-primary selectable" data-bs-toggle="modal" data-bs-target="#create-keep"></i>
+      </h3>
       <ProfileKeeps 
   v-for="k in keeps"
   :key="k.id"
   :keep="k"
-  class="col-md-2 shadow rounded m-3"
+  class=""
   />
     </div>
   </div>
+   <Modal id="create-keep">
+    <template #modal-title>
+      <h6>Create a Keep</h6>
+    </template>
+    <template #modal-body>
+      <KeepForm />
+    </template>
+  </Modal>
+     <Modal id="create-vault">
+    <template #modal-title>
+      <h6>Create a Vault</h6>
+    </template>
+    <template #modal-body>
+      <VaultForm />
+    </template>
+  </Modal>
 </template>
 
 

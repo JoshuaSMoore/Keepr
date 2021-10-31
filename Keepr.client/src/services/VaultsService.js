@@ -21,5 +21,10 @@ async editVault(vaultData)
   let vault = AppState.vaults.find(vault => vault.id === vaultData.id)
   AppState.vault = new Vault(res.data)
 }
+async createVault(vaultData){
+  const res = await api.post(`api/vaults`, vaultData)
+  logger.log('create vault res', res)
+  AppState.vaults.push(new Vault(res.data))
+}
 }
 export const vaultsService = new VaultsService()
