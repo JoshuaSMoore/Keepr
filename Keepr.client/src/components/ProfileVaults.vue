@@ -2,20 +2,17 @@
  <div class="card keepcard p-1">
   <div
         class="float-end on-hover action"
-        v-if="keep.creatorId == account.id"
+        v-if="vault.creatorId == account.id"
       >
-        <i class="mdi mdi-delete text-danger" @click="deleteKeep()"></i>
+        <i class="mdi mdi-delete text-danger" @click="deleteVault()"></i>
         <!-- <i
           class="mdi mdi-lead-pencil"
           data-bs-toggle="modal"
           :data-bs-target="'#edit-keep-' + keep.id"
         ></i> -->
       </div>
-   <img :src="keep.img" class="card-img-top keepimage selectable" alt="..." data-bs-toggle="modal" data-bs-target="#keep-modal" />
-      <h5 class="card-text d-flex justify-content-between p-2">{{keep.name}}
-        <router-link :to= "{ name: 'ProfilePage', params: { id: keep.creatorId } }">
-      <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
-        </router-link>
+      <h5 class="card-text d-flex justify-content-between p-2">{{vault.name}}
+      {{vault.description}}
       </h5>
  </div>
 </template>
@@ -23,26 +20,26 @@
 
 <script>
 import { computed } from '@vue/reactivity'
-import { Keep } from '../Models/Keep.js'
+import { Vault } from '../Models/Vault.js'
 import { AppState } from '../AppState.js'
-import { keepsService } from '../services/KeepsService.js'
+import { vaultsService } from '../services/VaultsService.js'
 import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop.js'
 
 export default {
   props: {
-    keep: {
-      type: Keep,
-      default: () => new Keep()
+    vault: {
+      type: Vault,
+      default: () => new Vault()
     }
   },
   setup(props){
     return {
     account: computed(() => AppState.account),
-    async deleteKeep(){
+    async deleteVault(){
       try {
         if(await Pop.confirm()){
-          await keepsService.deleteKeep(props.keep.id)
+          await vaultsService.deleteVault(props.vault.id)
           Pop.toast('Keep has been deleted')
         }
       } catch (error) {
@@ -58,7 +55,7 @@ export default {
 
 <style lang="scss" scoped>
 .keepimage{
-  max-height: 40rem;
+  max-height: 13rem;
 }
 .profilepic{
   height: 3rem;

@@ -23,9 +23,6 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'ProfilePage', params:{id: id} }" class="btn text-success lighten-30 selectable text-uppercase">
-            ProfilesTest
-          </router-link>
         </li>
       </ul>
       <span class="navbar-text">

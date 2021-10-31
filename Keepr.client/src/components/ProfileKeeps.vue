@@ -11,11 +11,8 @@
           :data-bs-target="'#edit-keep-' + keep.id"
         ></i> -->
       </div>
-   <img :src="keep.img" class="card-img-top keepimage selectable" alt="..." data-bs-toggle="modal" data-bs-target="#keep-modal" />
+   <img :src="keep.img" class="card-img-top keepimage selectable" alt="..." />
       <h5 class="card-text d-flex justify-content-between p-2">{{keep.name}}
-        <router-link :to= "{ name: 'ProfilePage', params: { id: keep.creatorId } }">
-      <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
-        </router-link>
       </h5>
  </div>
 </template>
@@ -58,7 +55,7 @@ export default {
 
 <style lang="scss" scoped>
 .keepimage{
-  max-height: 40rem;
+  max-height: 13rem;
 }
 .profilepic{
   height: 3rem;
