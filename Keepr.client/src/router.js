@@ -21,7 +21,12 @@ const routes = [
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
-  }
+  },
+  // {
+  //  path: '/keeps/:id',
+  //  name: 'KeepDetails',
+  //  component: loadPage('KeepDetailsPage')
+  // }
 ]
 
 export const router = createRouter({
