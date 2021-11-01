@@ -47,7 +47,7 @@ import { keepsService } from '../services/KeepsService.js'
 export default {
   props: {
     keep: {
-      type: Keep,
+      type: Object,
       default: () => new Keep()
     }
   },
@@ -68,7 +68,6 @@ export default {
             Pop.toast('Keep has been edited')
             return
           }
-          editable.value.keepId = route.params.id
           await keepsService.createKeep(editable.value)
           const modal = Modal.getInstance(document.getElementById('create-keep'))
           modal.hide()

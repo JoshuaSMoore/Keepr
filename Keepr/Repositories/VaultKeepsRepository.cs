@@ -37,10 +37,10 @@ namespace Keepr.Repositories
       return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (v, a) => { v.Creator = a; return v; }, new { vaultKeepId }).FirstOrDefault();
     }
 
-    public void Delete(int id)
+    public void Delete(int vaultKeepId)
     {
       string sql = @"DELETE FROM vaultkeeps WHERE id = @id LIMIT 1";
-      var rowsAffected = _db.Execute(sql, new { id});
+      var rowsAffected = _db.Execute(sql, new { vaultKeepId});
       if(rowsAffected == 0)
       {
         throw new Exception("No vaultkeep found with that id");
@@ -61,7 +61,7 @@ namespace Keepr.Repositories
       JOIN keeps k ON k.id = vk.keepId
       WHERE vk.vaultId = @vaultId;
       ";
-      return _db.Query<VaultKeepViewModel>(sql, new { vaultId }).ToList();
+      return _db.Query<VaultKeepViewModel>(sql,  new { vaultId }).ToList();
     }
   }
 }

@@ -39,7 +39,7 @@ import Pop from '../utils/Pop.js'
 export default {
   props: {
     keep: {
-      type: Keep,
+      type: Object,
       default: () => new Keep()
     }
   },

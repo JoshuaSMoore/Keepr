@@ -21,7 +21,7 @@
     <template #modal-body>
   <div class="row g-0">
     <div class="col-md-8">
-      <img :src="keep.img" style="max-width: 40rem;" alt="...">
+      <img :src="keep.img" style="max-width: 40rem" alt="...">
     </div>
     <div class="col-md-3">
       <div class="card-body border-bottom border-secondary">
@@ -29,9 +29,13 @@
         <p class="card-text"><small class="text-muted">Shares: {{keep.shares}}<br> Views: {{keep.views}} </small></p>
         <p class="card-text">Keeps: {{keep.description}} </p>
       </div>
-      <div class="btn btn-outline-secondary mt-3 m-3">Add to Vault</div>
-       <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
+      <div class="row justify-content-around">   
+      <div class="modaltext">
+      <div class="btn btn-outline-secondary mt-3 m-3 me-4">Add to Vault</div>
+       <img :src="keep.creator.picture" class="rounded-circle profilepic ms-5" alt="" />
        <small> {{keep.creator.name}}</small>
+      </div>
+       </div>
     </div>
 </div>
     </template>
@@ -50,7 +54,7 @@ import Pop from '../utils/Pop.js'
 export default {
   props: {
     keep: {
-      type: Keep,
+      type: Object,
       default: () => new Keep()
     }
   },
@@ -90,6 +94,19 @@ export default {
   right: 0;
   padding: 0.5rem;
 }
+.modaltext{
+ position: absolute;
+  bottom: 0;
+  // left: 0;
+  right: -45rem;
+  padding: 0.5rem;
+}
+@media (max-width: 800px) {
+  .modaltext{
+    position: relative;
+  }
+}
+
 
 
 </style>
