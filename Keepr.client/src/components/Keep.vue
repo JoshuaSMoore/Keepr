@@ -13,7 +13,6 @@
       </h5>
         <router-link :to= "{ name: 'ProfilePage', params: { id: keep.creatorId } }">
       <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
-       <small> {{keep.creator.name}}</small>
         </router-link>
         </div>
    </div>
@@ -78,8 +77,8 @@ export default {
 <style lang="scss" scoped>
 
 .profilepic{
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 .keepcard{
   background-color: black;
