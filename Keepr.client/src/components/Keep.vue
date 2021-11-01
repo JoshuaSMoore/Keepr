@@ -8,8 +8,8 @@
       >
         <i class="mdi mdi-delete text-danger" @click="deleteKeep()"></i>
       </div>
-      <div class="text-end">
-      <h5 class="card-text text-light selectable" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">{{keep.name}}
+      <div class="text-end textbot d-flex justify-content-between">
+      <h5 class="card-text text-light action" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">{{keep.name}}
       </h5>
         <router-link :to= "{ name: 'ProfilePage', params: { id: keep.creatorId } }">
       <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
@@ -20,13 +20,6 @@
    </div>
  <Modal :id="'keep-modal-' + keep.id">
     <template #modal-body>
-      <!-- <div class="row">
-          <img class="img-fluid modalkeep" :src="keep.img" alt="">
-          <h3> 
-          {{ keep.name }}
-           {{ keep.description }}
-          </h3>
-        </div> -->
   <div class="row g-0">
     <div class="col-md-8">
       <img :src="keep.img" style="max-width: 40rem;" alt="...">
@@ -91,4 +84,13 @@ export default {
 .keepcard{
   background-color: black;
 }
+.textbot{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+}
+
+
 </style>

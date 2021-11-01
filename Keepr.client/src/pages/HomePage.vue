@@ -50,15 +50,15 @@ return {
 
 .masonry{
   padding: 1em;;
-  column-count: 3;
+  column-count: 4;
   background-color:black;
 }
 img{width: 100%;
 margin-bottom: 1em;
 }
 @media(max-width: 800px){
-  .container-fluid{
-    column-count: 2;
+  .masonry{
+    column-count: 1;
   }
 }
   
