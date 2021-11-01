@@ -37,10 +37,10 @@ namespace Keepr.Repositories
       return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (v, a) => { v.Creator = a; return v; }, new { vaultKeepId }).FirstOrDefault();
     }
 
-    public void Delete(int vaultKeepId)
+    public void Delete(int id)
     {
-      string sql = @"DELETE FROM vaultkeeps WHERE id = @vaultKeepId LIMIT 1";
-      var rowsAffected = _db.Execute(sql, new { vaultKeepId});
+      string sql = @"DELETE FROM vaultkeeps WHERE id = @id LIMIT 1";
+      var rowsAffected = _db.Execute(sql, new { id});
       if(rowsAffected == 0)
       {
         throw new Exception("No vaultkeep found with that id");
@@ -51,25 +51,22 @@ namespace Keepr.Repositories
     {
       var sql = @"
       SELECT
-      vk.*,
-      k.*,
-      v.*
+      vk.id as vaultKeepId,
+      vk.keepId as keepId,
+      v.*,
+      k.*
       FROM vaultkeeps vk
+      JOIN accounts a on a.id = vk.creatorId
+      JOIN vaults v on v.id = @vaultId
       JOIN keeps k ON k.id = vk.keepId
-      JOIN vaults v ON v.id = vk.vaultId
       WHERE vk.vaultId = @vaultId;
       ";
-      return _db.Query<VaultKeepViewModel, Keep, Vault, VaultKeepViewModel>(sql, (vk, k, v) => {
-        vk.Keep = k;
-        vk.Vault = v;
-        return vk;
-      }, new { vaultId }, splitOn: "keepId, vaultId").ToList();
+      return _db.Query<VaultKeepViewModel>(sql, new { vaultId }).ToList();
     }
   }
 }
 
-  //  vk.id as vaultKeepId,
-  //     vk.keepId as keepId,
+ 
   //     vk.vaultId as vaultId,
   //     k.creatorId as creatorId,
   //     k.name as name,

@@ -1,7 +1,7 @@
 <template>
 <div class="container-fluid ">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 masonry">
 
   <Keep 
   v-for="k in keeps"
@@ -48,17 +48,17 @@ return {
 
 <style scoped lang="scss">
 
-.container-fluid{
-  padding: 2em;
-  column-count: 4;
+.masonry{
+  padding: 1em;;
+  column-count: 3;
   background-color:black;
 }
 img{width: 100%;
 margin-bottom: 1em;
 }
 @media(max-width: 800px){
-  .container{
-    column-count: 3;
+  .container-fluid{
+    column-count: 2;
   }
 }
   

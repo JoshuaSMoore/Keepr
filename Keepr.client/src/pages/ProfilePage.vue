@@ -23,7 +23,7 @@
     <ProfileVaults v-for="v in vaults" :key="v.id" :vault="v"/>
     </div>
   </div>
-  <div class="container-fluid mt-4 p-3">
+  <div class="container-fluid mt-4 p-3 masonry">
     <div class="row justify-content-between">
       <h3> Keeps
         <i class="mdi mdi-plus text-primary selectable" data-bs-toggle="modal" data-bs-target="#create-keep"></i>
@@ -85,5 +85,4 @@ export default {
 
 
 <style lang="scss" scoped>
-
 </style>

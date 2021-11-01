@@ -1,22 +1,22 @@
 <template>
-
- <div class="keepcard p-3">
+ <div class="card keepcard m-4">
+   <img :src="keep.img" class="card-img" style="" alt="..."/>
+   <div class="card-img-overlay">
   <div
-        class="float-end on-hover action"
+        class="float-top on-hover action"
         v-if="keep.creatorId == account.id"
       >
         <i class="mdi mdi-delete text-danger" @click="deleteKeep()"></i>
       </div>
-   <img :src="keep.img" class="card-img keepimage selectable" style="max-width: 18rem" alt="..."  :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" />
-   <!-- <div class="card-img-overlay">
-   </div> -->
-
-      <h5 class="card-text text-light d-flex justify-content-bottom p-1">{{keep.name}}
+      <div class="text-end">
+      <h5 class="card-text text-light selectable" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">{{keep.name}}
       </h5>
         <router-link :to= "{ name: 'ProfilePage', params: { id: keep.creatorId } }">
       <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
        <small> {{keep.creator.name}}</small>
         </router-link>
+        </div>
+   </div>
    </div>
  <Modal :id="'keep-modal-' + keep.id">
     <template #modal-body>
@@ -83,14 +83,12 @@ export default {
 
 
 <style lang="scss" scoped>
-.keepimage{
-  max-height: 40rem;
-}
+
 .profilepic{
   height: 2rem;
   width: 2rem;
 }
-.modalkeep{
-  background-repeat: no-repeat;
+.keepcard{
+  background-color: black;
 }
 </style>
