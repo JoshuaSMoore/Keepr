@@ -1,24 +1,20 @@
 <template>
-<div class = "col-md-2 shadow rounded m-1">
- <div class="keepcard p-2 m-1">
-  <div
-        class="float-end on-hover action"
-        v-if="vault.creatorId == account.id"
+<div class = "col-md-2 shadow rounded m-1 m-2">
+ <div class="keepcard p-2 ">
+  <div class="float-end on-hover action" v-if="vault.creatorId == account.id"
       >
         <i class="mdi mdi-delete text-danger" @click="deleteVault()"></i>
-        <i
-          class="mdi mdi-lead-pencil"
-          data-bs-toggle="modal"
-          :data-bs-target="'#edit-vault-' + vault.id"
-        ></i>
-      </div>
+        <i class="mdi mdi-lead-pencil" data-bs-toggle="modal" :data-bs-target="'#edit-vault-' + vault.id"></i>
+</div>
+ </div>
+      <div class="card-body p-2 mb-2">
        <router-link :to= "{ name: 'VaultPage', params: { id: vault.id } }">
       <h5 class="card-text p-1 selectable">
          {{vault.name}}
       </h5>
        </router-link>
- </div>
-</div>
+      </div>
+      </div>
    <Modal :id="'edit-vault-' + vault.id">
     <template #modal-title>
       <h6>Edit your vault!</h6>

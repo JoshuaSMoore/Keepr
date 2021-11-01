@@ -37,7 +37,9 @@
         <p class="card-text"><small class="text-muted">Shares: {{keep.shares}}<br> Views: {{keep.views}} </small></p>
         <p class="card-text">Keeps: {{keep.description}} </p>
       </div>
-      <div class="btn btn-outline-secondary mt-3">Add to Vault</div>
+      <div class="btn btn-outline-secondary mt-3 m-3">Add to Vault</div>
+       <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
+       <small> {{keep.creator.name}}</small>
     </div>
 </div>
     </template>
