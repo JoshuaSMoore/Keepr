@@ -7,9 +7,9 @@
       >
         <i class="mdi mdi-delete text-danger" @click="deleteKeep()"></i>
       </div>
-   <img :src="keep.img" class="card-img keepimage selectable" alt="..."  :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" />
-   </div>
-   <div class="div">
+   <img :src="keep.img" class="card-img keepimage selectable" style="max-width: 18rem" alt="..."  :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" />
+   <!-- <div class="card-img-overlay">
+   </div> -->
 
       <h5 class="card-text text-light d-flex justify-content-bottom p-1">{{keep.name}}
       </h5>
