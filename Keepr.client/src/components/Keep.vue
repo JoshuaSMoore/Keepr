@@ -20,13 +20,26 @@
    </div>
  <Modal :id="'keep-modal-' + keep.id">
     <template #modal-body>
-      <div class="row">
+      <!-- <div class="row">
           <img class="img-fluid modalkeep" :src="keep.img" alt="">
           <h3> 
           {{ keep.name }}
            {{ keep.description }}
           </h3>
-        </div>
+        </div> -->
+  <div class="row g-0">
+    <div class="col-md-8">
+      <img :src="keep.img" style="max-width: 40rem;" alt="...">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body border-bottom border-secondary">
+        <h5 class="card-title">{{ keep.name }}</h5>
+        <p class="card-text"><small class="text-muted">Shares: {{keep.shares}}<br> Views: {{keep.views}} </small></p>
+        <p class="card-text">Keeps: {{keep.description}} </p>
+      </div>
+      <div class="btn btn-outline-secondary mt-3">Add to Vault</div>
+    </div>
+</div>
     </template>
   </Modal>
 </template>

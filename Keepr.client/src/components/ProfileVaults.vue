@@ -12,8 +12,11 @@
           :data-bs-target="'#edit-vault-' + vault.id"
         ></i>
       </div>
-      <h5 class="card-text p-1">{{vault.name}}
+       <router-link :to= "{ name: 'VaultPage', params: { id: vault.id } }">
+      <h5 class="card-text p-1 selectable">
+         {{vault.name}}
       </h5>
+       </router-link>
  </div>
 </div>
    <Modal :id="'edit-vault-' + vault.id">
