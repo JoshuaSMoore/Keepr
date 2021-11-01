@@ -1,11 +1,12 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img
           alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
+          src="https://i.pinimg.com/originals/da/07/c3/da07c3ef445648b1f68e37c6c17da228.png"
+          height="50"
+          class="rounded"
         />
       </div>
     </router-link>

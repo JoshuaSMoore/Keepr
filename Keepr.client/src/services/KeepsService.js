@@ -18,7 +18,7 @@ class KeepsService{
   async createKeep(keepData){
     const res = await api.post('api/keeps', keepData)
     logger.log('createKeep res', res)
-    AppState.keeps.push(new Keep(res.data))
+    AppState.keeps.unshift(new Keep(res.data))
   }
   async deleteKeep(keepId){
     const res = await api.delete(`api/keeps/${keepId}`)
@@ -28,8 +28,8 @@ class KeepsService{
   async editKeep(keepData){
     const res = await api.put(`api/keeps/${keepData.id}`, keepData)
     logger.log('editKeep res', res)
-    let keep = AppState.keeps.find(keep => keep.id === keepData.id)
-    AppState.keep = new Keep(res.data)
+    let keep = AppState.keeps.findIndex(keep => keep.id === keepData.id)
+    AppState.keeps.splice(keep, 1, new Keep(res.data))
 }
 }
 export const keepsService = new KeepsService()

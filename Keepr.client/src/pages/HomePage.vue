@@ -1,16 +1,16 @@
 <template>
-<div class="body">
-
 <div class="container-fluid ">
-  <div class="row justify-content-around">
+  <div class="row">
+    <div class="col-12">
+
   <Keep 
   v-for="k in keeps"
   :key="k.id"
   :keep="k"
   />
+    </div>
 </div>
   </div>
-</div>
    <Modal id="keep-modal">
     <template #modal-title>
     </template>
@@ -47,33 +47,19 @@ return {
 </script>
 
 <style scoped lang="scss">
-body {
-  margin: 0;
-  padding: 1rem;
-}
 
-.masonry-with-columns {
-  columns: 6 200px;
-  column-gap: 1rem;
-  div {
-    width: 150px;
-    background: #EC985A;
-    color: white;
-    margin: 0 1rem 1rem 0;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    font-family: system-ui;
-    font-weight: 900;
-    font-size: 2rem;
-  } 
-  @for $i from 1 through 36 { 
-    div:nth-child(#{$i}) {
-      $h: (random(400) + 100) + px;
-      height: $h;
-      line-height: $h;
-    }
+.container-fluid{
+  padding: 2em;
+  column-count: 4;
+  background-color:black;
+}
+img{width: 100%;
+margin-bottom: 1em;
+}
+@media(max-width: 800px){
+  .container{
+    column-count: 3;
   }
 }
-
+  
 </style>

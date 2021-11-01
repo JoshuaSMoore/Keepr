@@ -1,25 +1,29 @@
 <template>
 <div class="container-fluid">
-  <div class="row">
+    <div class="mb-3 pt-4 ps-3" style="max-width: 540px;">
+  <div class="row g-0">
     <div class="col-md-4">
- <div class=" card about text-start p-2">
-   <h1>
-    <img class="rounded" :src="account.picture" alt="" />
-    {{ account.name }}</h1>
-    <p>Keeps: {{keeps.length}} <br> Vaults: {{vaults.length}} </p>
+      <img :src="account.picture" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ account.name }}</h5>
+        <p class="card-text">Keeps: {{keeps.length}} <br> Vaults: {{vaults.length}}</p>
+        <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      </div>
     </div>
   </div>
+</div>
   </div>
-  </div>
-  <div class="container-fluid">
+  <div class="container-fluid mt-4 p-3">
     <div class="row justify-content-between">  
     <h3> Vaults
        <i class="mdi mdi-plus text-primary selectable" data-bs-toggle="modal" data-bs-target="#create-vault"></i>
     </h3>
-    <ProfileVaults v-for="v in vaults" :key="v.id" :vault="v" class="col-md-2 shadow rounded m-3" />
+    <ProfileVaults v-for="v in vaults" :key="v.id" :vault="v"/>
     </div>
   </div>
-  <div class="container-fluid">
+  <div class="container-fluid mt-4 p-3">
     <div class="row justify-content-between">
       <h3> Keeps
         <i class="mdi mdi-plus text-primary selectable" data-bs-toggle="modal" data-bs-target="#create-keep"></i>
@@ -28,7 +32,6 @@
   v-for="k in keeps"
   :key="k.id"
   :keep="k"
-  class=""
   />
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
-<div class = "col-md-2 shadow rounded m-3">
- <div class="card keepcard p-1">
+<div class = "col-md-2 shadow rounded m-1">
+ <div class="keepcard p-2 m-1">
   <div
         class="float-end on-hover action"
         v-if="vault.creatorId == account.id"
@@ -12,7 +12,7 @@
           :data-bs-target="'#edit-vault-' + vault.id"
         ></i>
       </div>
-      <h5 class="card-text d-flex justify-content-between p-2">{{vault.name}}
+      <h5 class="card-text p-1">{{vault.name}}
       </h5>
  </div>
 </div>

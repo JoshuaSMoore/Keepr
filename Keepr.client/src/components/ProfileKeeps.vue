@@ -1,6 +1,6 @@
 <template>
-<div class = "col-md-2 shadow rounded m-3">
- <div class="card keepcard p-1">
+<div class = "col-md-2 shadow rounded m-1">
+ <div class="keepcard">
   <div
         class="float-end on-hover action"
         v-if="keep.creatorId == account.id"
@@ -12,8 +12,8 @@
           :data-bs-target="'#edit-keep-' + keep.id"
         ></i>
       </div>
-   <img :src="keep.img" class="card-img-top keepimage selectable" alt="..." />
-      <h5 class="card-text d-flex justify-content-between p-2">{{keep.name}}
+   <img :src="keep.img" class="card-img-top keepimage" alt="..." />
+      <h5 class="card-text p-2">{{keep.name}}
       </h5>
  </div>
 </div>

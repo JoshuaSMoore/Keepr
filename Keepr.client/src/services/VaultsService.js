@@ -18,13 +18,13 @@ async editVault(vaultData)
 {
   const res = await api.put(`api/vaults/${vaultData.id}`, vaultData)
   logger.log('edit vault res', res)
-  let vault = AppState.vaults.find(vault => vault.id === vaultData.id)
-  AppState.vault = new Vault(res.data)
+  let vault = AppState.vaults.findIndex(vault => vault.id === vaultData.id)
+  AppState.vaults.splice(vault, 1, new Vault(res.data))
 }
 async createVault(vaultData){
   const res = await api.post(`api/vaults`, vaultData)
   logger.log('create vault res', res)
-  AppState.vaults.push(new Vault(res.data))
+  AppState.vaults.unshift(new Vault(res.data))
 }
 }
 export const vaultsService = new VaultsService()
