@@ -28,12 +28,6 @@ namespace Keepr.Services
     }
     return foundVaultKeep;
     }
-      public Vault Get(int id)
-    {
-      Vault foundVault = _vaultsRepository.Get(id);
-      
-      return foundVault;
-    }
 
     public void RemoveVaultKeep(int vaultKeepId, string userId)
     {

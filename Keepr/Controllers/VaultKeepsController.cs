@@ -36,6 +36,21 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
                 }
             }
+            //  public async Task<ActionResult<VaultKeep>> Post([FromBody] VaultKeep newVaultKeep)
+            // {
+            //     try
+            //     {
+            //     Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+            //     newVaultKeep.CreatorId = userInfo.Id;
+            //     var createdVaultKeep = _vaultKeepsService.Post(newVaultKeep);
+            //     createdVaultKeep.Creator = userInfo;
+            //     return Ok(createdVaultKeep);
+            //     }
+            //     catch (System.Exception e)
+            //     {
+            //     return BadRequest(e.Message);
+            //     }
+            // }
             [HttpGet("{vaultKeepId}")]
             public async Task<ActionResult<VaultKeep>> GetById(int id)
             {

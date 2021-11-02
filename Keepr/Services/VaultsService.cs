@@ -16,14 +16,14 @@ namespace Keepr.Services
           _vaultsRepository = vaultsRepository;
           _vaultKeepsRepository = vaultKeepsRepository;
       }
-    public Vault GetById(int vaultId, string id)
+    public Vault GetById(int vaultId, string userId)
     {
       Vault foundVault = _vaultsRepository.Get(vaultId);
       if (foundVault == null)
       {
         throw new Exception("Invalid Id");
       }
-      if (foundVault.IsPrivate == true && foundVault.CreatorId != id)
+      if (foundVault.IsPrivate == true && foundVault.CreatorId != userId)
       {
         throw new Exception("This aint it dude");
       }
@@ -42,6 +42,7 @@ namespace Keepr.Services
       }
       return foundVault;
     }
+
     
 
     public List<Vault> GetAll()
@@ -77,9 +78,10 @@ namespace Keepr.Services
         return _vaultsRepository.Edit(foundVault);
     }
 
-    public List<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
+    public List<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)
     {
-      return _vaultKeepsRepository.GetKeepsByVaultId(vaultId);
+      Vault foundVault = GetById(vaultId, userId);
+     return _vaultKeepsRepository.GetKeepsByVaultId(vaultId);
     }
   }
 }

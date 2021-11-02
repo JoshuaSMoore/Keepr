@@ -100,7 +100,7 @@ namespace Keepr.Controllers
       try
       {
            Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        List<VaultKeepViewModel> keeps = _vaultsService.GetKeepsByVaultId(vaultId);
+        List<VaultKeepViewModel> keeps = _vaultsService.GetKeepsByVaultId(vaultId, userInfo?.Id);
         return Ok(keeps);
       }
       catch (System.Exception e)
