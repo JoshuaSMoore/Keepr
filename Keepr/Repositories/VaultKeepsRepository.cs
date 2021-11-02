@@ -33,14 +33,14 @@ namespace Keepr.Repositories
       a.*
       FROM vaultkeeps v
       JOIN accounts a on a.id = v.creatorId
-      WHERE id = @vaultKeepId;";
+      WHERE v.id = @vaultKeepId;";
       return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (v, a) => { v.Creator = a; return v; }, new { vaultKeepId }).FirstOrDefault();
     }
 
     public void Delete(int vaultKeepId)
     {
-      string sql = @"DELETE FROM vaultkeeps WHERE id = @id LIMIT 1";
-      var rowsAffected = _db.Execute(sql, new { vaultKeepId});
+      string sql = @"DELETE FROM vaultkeeps WHERE id = @vaultKeepId LIMIT 1";
+      var rowsAffected = _db.Execute(sql, new { vaultKeepId });
       if(rowsAffected == 0)
       {
         throw new Exception("No vaultkeep found with that id");

@@ -19,30 +19,37 @@ namespace Keepr.Services
       return _vaultKeepsRepository.Create(vaultKeepData);
     }
 
-    public VaultKeep GetById(int vaultKeepId, string id)
+    public VaultKeep GetById(int id)
     {
-    VaultKeep foundVaultKeep =  _vaultKeepsRepository.GetById(vaultKeepId);
+    VaultKeep foundVaultKeep =  _vaultKeepsRepository.GetById(id);
     if(foundVaultKeep == null)
     {
       throw new Exception("Invalid Id");
     }
-    if (foundVaultKeep.Vault.IsPrivate == true && foundVaultKeep.CreatorId != id)
-    {
-      throw new Exception("You do not have access to this VaultKeep");
-      
-    }
     return foundVaultKeep;
+    }
+      public VaultKeep Get(int vaultKeepsId, string id)
+    {
+      VaultKeep foundVault = _vaultKeepsRepository.GetById(vaultKeepsId);
+      if (foundVault == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      if (foundVault.Vault.IsPrivate == true && foundVault.Vault.CreatorId != id)
+      {
+        throw new Exception("This aint it dude");
+      }
+      return foundVault;
     }
 
     public void RemoveVaultKeep(int vaultKeepId, string userId)
     {
-      VaultKeep foundVaultKeep = _vaultKeepsRepository.GetById(vaultKeepId);
+      VaultKeep foundVaultKeep = GetById(vaultKeepId);
       if(foundVaultKeep.CreatorId != userId)
       {
         throw new Exception("This is not your vault keep");
       }
       _vaultKeepsRepository.Delete(vaultKeepId);
     }
-    
-  }
+}
 }
