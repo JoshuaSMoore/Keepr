@@ -49,27 +49,11 @@ return {
 <style scoped lang="scss">
 
 .masonry{
-  padding: 1em;;
+  padding: 1em;
   columns: 4;
-  div {
-    width: 1500px;
-    margin: 0 1rem 1rem 0 auto;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    font-family: system-ui;
-    font-weight: 900;
-    font-size: 2rem;
-      overflow: hidden;
-    
-}
-  @for $i from 1 through 36 { 
-    div:nth-child(#{$i}) {
-      $h: (random(400) + 100) + px;
-      height: $h;
-      line-height: $h;
-    }
- } 
+  break-inside: avoid;
+  grid-template-rows: 1fr auto;
+  display: inline-block;
 }
 img{width: 100%;
 margin-bottom: 1em;

@@ -30,7 +30,8 @@
         <p class="card-text">Keeps: {{keep.description}} </p>
       </div>
       <div class="row justify-content-around">   
-      <div class="modaltext">
+      <div class="modaltext d-flex">
+        
    <div class="dropdown">
           <button
             class="btn btn-secondary dropdown-toggle"
@@ -42,12 +43,12 @@
             Add to Vault
           </button>
           <ul class="dropdown-menu" aria-labelledby="vaultDropDown">
-            <li v-for="v in vault" :vault="vault" :key="vault.id" class="selectable">{{vault.name}}
+            <li v-for="v in usersvaults" :vault="v" :key="v.id" class="selectable" @click="addToVault(v.id)">{{v.name}}
             </li>
           </ul>
         </div>
        <img :src="keep.creator.picture" class="rounded-circle profilepic ms-5" alt="" />
-       <small> {{keep.creator.name}}</small>
+       <h5>{{keep.creator.name}}</h5>
       </div>
        </div>
     </div>
@@ -77,6 +78,8 @@ export default {
     account: computed(() => AppState.account),
     vault: computed(() => AppState.vault),
     vaults: computed(() => AppState.vaults),
+    usersvaults: computed(() => AppState.usersvaults),
+    vaultkeeps: computed(() => AppState.vaultkeeps),
     async deleteKeep(){
       try {
         if(await Pop.confirm()){
@@ -87,7 +90,20 @@ export default {
         Pop.toast(error.message, 'error')
         logger.log(error)
       }
-    }
+    },
+       async addToVault(vaultId){
+        try {
+          let vaultkeeps = {
+            keepId: props.keep.id,
+            vaultId: vaultId
+          };
+          await keepsService.addVaultKeep(vaultkeeps)
+          Pop.toast('Keep has been added to vault')
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+          logger.log(error)
+        }
+      }
     }
   }
 }
