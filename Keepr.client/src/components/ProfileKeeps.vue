@@ -12,7 +12,7 @@
         ></i>
       </div>
    <img :src="keep.img" class="card-img-top keepimage" alt="..." />
-      <h5 class="card-text p-2">{{keep.name}}
+      <h5 class="card-text text-light action" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">{{keep.name}}
       </h5>
  </div>
    <Modal :id="'edit-keep-' + keep.id">
@@ -21,6 +21,42 @@
     </template>
     <template #modal-body>
       <KeepForm :keep="keep" />
+    </template>
+  </Modal>
+   <Modal :id="'keep-modal-' + keep.id">
+    <template #modal-body>
+  <div class="row g-0">
+    <div class="col-md-8">
+      <img :src="keep.img" style="max-width: 40rem" alt="...">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body border-bottom border-secondary">
+        <h5 class="card-title">{{ keep.name }}</h5>
+        <p class="card-text"><small class="text-muted">Shares: {{keep.shares}}<br> Views: {{keep.views}} </small></p>
+        <p class="card-text">Keeps: {{keep.description}} </p>
+      </div>
+      <div class="row justify-content-around">   
+      <div class="modaltext">
+   <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Add to Vault
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li v-for="vault in vault" :key="vault.id" @click="addToVault(vault, keep)" class="selectable">{{vault.name}}</li>
+          </ul>
+        </div>
+       <img :src="keep.creator.picture" class="rounded-circle profilepic ms-5" alt="" />
+       <small> {{keep.creator.name}}</small>
+      </div>
+       </div>
+    </div>
+</div>
     </template>
   </Modal>
 </template>

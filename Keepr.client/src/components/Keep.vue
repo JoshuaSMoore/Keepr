@@ -31,13 +31,20 @@
       </div>
       <div class="row justify-content-around">   
       <div class="modaltext">
-      <div class="dropdown">
-        <button class = "btn btn-outline-secondary dropdown-toggle mt-3 m-3 me-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" @click="getUsersVaults()" aria-expanded="false">
-        Add to Vault
-        </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-             <li><a class="dropdown-item" href="#">  Add to Vault</a></li>
-             </ul>
+   <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="vaultDropDown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Add to Vault
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="vaultDropDown">
+            <li v-for="v in vault" :vault="vault" :key="vault.id" class="selectable">{{vault.name}}
+            </li>
+          </ul>
         </div>
        <img :src="keep.creator.picture" class="rounded-circle profilepic ms-5" alt="" />
        <small> {{keep.creator.name}}</small>
@@ -68,6 +75,8 @@ export default {
   setup(props){
     return {
     account: computed(() => AppState.account),
+    vault: computed(() => AppState.vault),
+    vaults: computed(() => AppState.vaults),
     async deleteKeep(){
       try {
         if(await Pop.confirm()){

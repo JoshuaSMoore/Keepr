@@ -37,7 +37,7 @@ import Pop from '../utils/Pop.js'
 export default {
   props: {
     vault: {
-      type: Object,
+      type: Vault,
       default: () => new Vault()
     }
   },
