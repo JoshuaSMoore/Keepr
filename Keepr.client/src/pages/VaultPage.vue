@@ -25,7 +25,7 @@ import { Keep } from '../Models/Keep.js'
 import { Vault } from '../Models/Vault.js'
 export default {
 
-  setup(props){
+  setup(){
     const route = useRoute()
     onMounted(() => {
         try {

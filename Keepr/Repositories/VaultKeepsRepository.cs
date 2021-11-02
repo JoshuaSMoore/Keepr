@@ -53,15 +53,15 @@ namespace Keepr.Repositories
       SELECT
       vk.id as vaultKeepId,
       vk.keepId as keepId,
-      v.*,
-      k.*
+      vk.*,
+      k.*,
+      a.*
       FROM vaultkeeps vk
       JOIN accounts a on a.id = vk.creatorId
-      JOIN vaults v on v.id = @vaultId
       JOIN keeps k ON k.id = vk.keepId
       WHERE vk.vaultId = @vaultId;
       ";
-      return _db.Query<VaultKeepViewModel>(sql,  new { vaultId }).ToList();
+     return _db.Query<VaultKeepViewModel, Profile, VaultKeepViewModel>(sql, (vk, a) => { vk.Creator = a; return vk; },  new { vaultId }).ToList();
     }
   }
 }
@@ -76,4 +76,4 @@ namespace Keepr.Repositories
   //     k.keeps as keeps,
   //     k.img as img,
   //     v.isPrivate as isPrivate
-  //  return _db.Query<VaultKeepViewModel, Profile, VaultKeepViewModel>(sql, (vk, a) => { vk.Creator = a; return vk; },  new { vaultId }).ToList();
+  

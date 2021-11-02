@@ -28,17 +28,10 @@ namespace Keepr.Services
     }
     return foundVaultKeep;
     }
-      public VaultKeep Get(int vaultKeepsId, string id)
+      public Vault Get(int id)
     {
-      VaultKeep foundVault = _vaultKeepsRepository.GetById(vaultKeepsId);
-      if (foundVault == null)
-      {
-        throw new Exception("Invalid Id");
-      }
-      if (foundVault.Vault.IsPrivate == true && foundVault.Vault.CreatorId != id)
-      {
-        throw new Exception("This aint it dude");
-      }
+      Vault foundVault = _vaultsRepository.Get(id);
+      
       return foundVault;
     }
 

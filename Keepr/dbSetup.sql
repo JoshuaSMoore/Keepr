@@ -42,3 +42,16 @@ CREATE TABLE IF NOT EXISTS vaultkeeps (
 ) default charset utf8 COMMENT '';
 
 
+    
+ 
+      SELECT
+      vk.id as vaultKeepId,
+      vk.*,
+      k.*,
+      a.*
+      FROM vaultkeeps vk
+      JOIN keeps k ON k.id = vk.keepId
+      JOIN accounts a on a.id = vk.creatorId
+      WHERE vk.vaultId = 482;
+
+      SELECT * FROM vaultkeeps
