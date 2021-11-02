@@ -76,3 +76,4 @@ namespace Keepr.Repositories
   //     k.keeps as keeps,
   //     k.img as img,
   //     v.isPrivate as isPrivate
+  //  return _db.Query<VaultKeepViewModel, Profile, VaultKeepViewModel>(sql, (vk, a) => { vk.Creator = a; return vk; },  new { vaultId }).ToList();

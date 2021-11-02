@@ -35,6 +35,16 @@ namespace Keepr.Repositories
       { throw new Exception("No vault found");
       }
     }
+     public Vault GetNonPrivate(int id)
+    {
+      string sql = @"SELECT
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a on a.id = v.creatorId
+      WHERE v.id = @Id;";
+      return _db.Query<Vault, Profile, Vault>(sql, (v, a) => { v.Creator = a; return v; }, new { id }).FirstOrDefault();
+    }
 
     public Vault Edit(Vault data)
     {
@@ -55,6 +65,7 @@ namespace Keepr.Repositories
       string sql = "SELECT * FROM vaults";
       return _db.Query<Vault>(sql).ToList();
     }
+    
 
     public Vault Get(int id)
     {

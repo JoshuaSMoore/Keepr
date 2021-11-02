@@ -31,7 +31,14 @@
       </div>
       <div class="row justify-content-around">   
       <div class="modaltext">
-      <div class="btn btn-outline-secondary mt-3 m-3 me-4">Add to Vault</div>
+      <div class="dropdown">
+        <button class = "btn btn-outline-secondary dropdown-toggle mt-3 m-3 me-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" @click="getUsersVaults()" aria-expanded="false">
+        Add to Vault
+        </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+             <li><a class="dropdown-item" href="#">  Add to Vault</a></li>
+             </ul>
+        </div>
        <img :src="keep.creator.picture" class="rounded-circle profilepic ms-5" alt="" />
        <small> {{keep.creator.name}}</small>
       </div>
@@ -105,6 +112,9 @@ export default {
   .modaltext{
     position: relative;
   }
+}
+.card-img{
+  position: relative;
 }
 
 

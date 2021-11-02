@@ -50,8 +50,26 @@ return {
 
 .masonry{
   padding: 1em;;
-  column-count: 4;
-  background-color:black;
+  columns: 4;
+  div {
+    width: 1500px;
+    margin: 0 1rem 1rem 0 auto;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: 900;
+    font-size: 2rem;
+      overflow: hidden;
+    
+}
+  @for $i from 1 through 36 { 
+    div:nth-child(#{$i}) {
+      $h: (random(400) + 100) + px;
+      height: $h;
+      line-height: $h;
+    }
+ } 
 }
 img{width: 100%;
 margin-bottom: 1em;
@@ -60,6 +78,9 @@ margin-bottom: 1em;
   .masonry{
     column-count: 1;
   }
+}
+.container-fluid{
+  background-color: black;
 }
   
 </style>

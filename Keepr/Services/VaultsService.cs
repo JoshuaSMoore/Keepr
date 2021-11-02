@@ -29,6 +29,20 @@ namespace Keepr.Services
       }
       return foundVault;
     }
+     public Vault Get(int vaultId, string id)
+    {
+      Vault foundVault = _vaultsRepository.GetNonPrivate(vaultId);
+      if (foundVault == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      if (foundVault.IsPrivate == true && foundVault.CreatorId != id)
+      {
+        throw new Exception("This aint it dude");
+      }
+      return foundVault;
+    }
+    
 
     public List<Vault> GetAll()
     {

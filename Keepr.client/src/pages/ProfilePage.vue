@@ -1,6 +1,6 @@
 <template>
 <div class="container-fluid">
-    <div class="mb-3 pt-4 ps-3" style="max-width: 540px;">
+    <div class=" pt-4 ps-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
       <img :src="account.picture" class="img-fluid rounded-start" alt="...">
@@ -15,7 +15,7 @@
   </div>
 </div>
   </div>
-  <div class="container-fluid mt-4 p-3">
+  <div class="container-fluid p-3">
     <div class="row justify-content-between">  
     <h3> Vaults
        <i class="mdi mdi-plus text-primary selectable" data-bs-toggle="modal" data-bs-target="#create-vault"></i>
@@ -23,8 +23,8 @@
     <ProfileVaults v-for="v in vaults" :key="v.id" :vault="v"/>
     </div>
   </div>
-  <div class="container-fluid mt-4 p-3 masonry">
-    <div class="row justify-content-between">
+  <div class="container-fluid p-3 masonry">
+
       <h3> Keeps
         <i class="mdi mdi-plus text-primary selectable" data-bs-toggle="modal" data-bs-target="#create-keep"></i>
       </h3>
@@ -33,7 +33,7 @@
   :key="k.id"
   :keep="k"
   />
-    </div>
+
   </div>
    <Modal id="create-keep">
     <template #modal-title>
@@ -85,4 +85,20 @@ export default {
 
 
 <style lang="scss" scoped>
+.masonry{
+  padding: 1em;;
+  column-count: 4;
+}
+img{width: 100%;
+margin-bottom: 1em;
+}
+@media(max-width: 800px){
+  .masonry{
+    column-count: 1;
+  }
+}
+.container-fluid{
+  background-color: black;
+  color: ghostwhite;
+}
 </style>

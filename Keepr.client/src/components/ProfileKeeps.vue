@@ -1,5 +1,4 @@
 <template>
-<div class = "col-md-2 shadow rounded m-1">
  <div class="keepcard">
   <div
         class="float-end on-hover action"
@@ -16,7 +15,6 @@
       <h5 class="card-text p-2">{{keep.name}}
       </h5>
  </div>
-</div>
    <Modal :id="'edit-keep-' + keep.id">
     <template #modal-title>
       <h6>Edit your keep!</h6>
@@ -64,9 +62,6 @@ export default {
 
 
 <style lang="scss" scoped>
-.keepimage{
-  max-height: 13rem;
-}
 .profilepic{
   height: 3rem;
   width: 3rem;

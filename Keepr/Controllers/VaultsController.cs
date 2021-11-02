@@ -95,10 +95,11 @@ namespace Keepr.Controllers
             }
     }
  [HttpGet("{vaultId}/keeps")]
-    public ActionResult<List<VaultKeepViewModel>> GetKeepsByVaultId(int vaultId)
+    public async Task<ActionResult<List<VaultKeepViewModel>>> GetKeepsByVaultId(int vaultId)
     {
       try
       {
+           Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
         List<VaultKeepViewModel> keeps = _vaultsService.GetKeepsByVaultId(vaultId);
         return Ok(keeps);
       }
