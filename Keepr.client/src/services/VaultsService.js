@@ -10,9 +10,6 @@ async getVault(vaultId){
   const res = await api.get(`api/vaults/${vaultId}`)
   logger.log('vault res', res)
   AppState.vaults = new Vault(res.data)
-  if(error === true){
-    router.push({ name: 'Home', params: { bugId: res.data.id } })
-  }
 }
 async deleteVault(vaultId){
   const res = await api.delete(`api/vaults/${vaultId}`)
