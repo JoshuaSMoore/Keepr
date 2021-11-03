@@ -27,21 +27,25 @@ namespace Keepr.Services
       {
         throw new Exception("This aint it dude");
       }
-      return foundVault;
-    }
-     public Vault Get(int vaultId, string id)
-    {
-      Vault foundVault = _vaultsRepository.GetNonPrivate(vaultId);
-      if (foundVault == null)
-      {
-        throw new Exception("Invalid Id");
-      }
-      if (foundVault.IsPrivate == true && foundVault.CreatorId != id)
+      if (foundVault.IsPrivate == true && userId == null)
       {
         throw new Exception("This aint it dude");
       }
       return foundVault;
     }
+    //  public Vault Get(int vaultId, string id)
+    // {
+    //   Vault foundVault = _vaultsRepository.GetNonPrivate(vaultId);
+    //   if (foundVault == null)
+    //   {
+    //     throw new Exception("Invalid Id");
+    //   }
+    //   if (foundVault.IsPrivate == true && foundVault.CreatorId != id)
+    //   {
+    //     throw new Exception("This aint it dude");
+    //   }
+    //   return foundVault;
+    // }
 
     
 

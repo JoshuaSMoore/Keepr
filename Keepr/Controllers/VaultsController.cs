@@ -70,7 +70,7 @@ namespace Keepr.Controllers
             try
             {
                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-                _vaultsService.RemoveVault(vaultId, userInfo.Id);
+                _vaultsService.RemoveVault(vaultId, userInfo?.Id);
                 return Ok("Vault Deleted");
             }
             catch (System.Exception e)

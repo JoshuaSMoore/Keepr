@@ -19,6 +19,11 @@ namespace Keepr.Services
     }
     public VaultKeep Post(VaultKeep vaultKeepData)
     {
+      Vault foundVault = _vaultsRepository.Get(vaultKeepData.VaultId);
+      if (foundVault.CreatorId != vaultKeepData.CreatorId)
+      {
+        throw new Exception("You can't add a keep to this vault");
+      }
       _keepsRepository.KeepsCounter(vaultKeepData.KeepId, 1);
       return _vaultKeepsRepository.Create(vaultKeepData);
     }
