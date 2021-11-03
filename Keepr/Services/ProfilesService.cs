@@ -22,9 +22,15 @@ public Profile Get(string profileId)
       return _profilesRepository.Get(profileId);
     }
 
-    public List<Vault> GetVaultsByProfile(string profileId)
+    public List<Vault> GetVaultsByProfile(string profileId, string userId)
     {
-      return _profilesRepository.GetVaultsByProfile(profileId);
+      if(profileId != userId){
+        var foundVaults = _profilesRepository.GetVaultsByProfile(profileId);
+        return foundVaults;
+      }
+      else{
+        return _profilesRepository.GetVaultsByUser(profileId);
+      }
     }
   }
 }

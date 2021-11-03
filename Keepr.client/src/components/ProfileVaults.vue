@@ -1,18 +1,18 @@
 <template>
 <div class = "col-md-2 shadow rounded">
- <div class="keepcard p-2 ">
+ <div class="keepcard card m-3 text-center rounded">
   <div class="float-end on-hover action" v-if="vault.creatorId == account.id"
       >
         <i class="mdi mdi-delete text-danger" @click="deleteVault()"></i>
         <i class="mdi mdi-lead-pencil" data-bs-toggle="modal" :data-bs-target="'#edit-vault-' + vault.id"></i>
 </div>
- </div>
       <div class="card-body p-2">
        <router-link :to= "{ name: 'VaultPage', params: { id: vault.id } }">
-      <h5 class="card-text p-1 selectable">
+      <h5 class="card-text p-1 action">
          {{vault.name}}
       </h5>
        </router-link>
+ </div>
       </div>
       </div>
    <Modal :id="'edit-vault-' + vault.id">

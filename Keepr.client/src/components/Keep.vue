@@ -98,6 +98,7 @@ export default {
             vaultId: vaultId
           };
           await keepsService.addVaultKeep(vaultkeeps)
+          props.keep.shares++
           Pop.toast('Keep has been added to vault')
         } catch (error) {
           Pop.toast(error.message, 'error')

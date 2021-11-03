@@ -5,7 +5,7 @@
       <div class="card-body">
   <h1 class="card-title" v-for="v in vault" :vault="v" :key="v.id">{{vault.name}}
   </h1>
-        <p class="card-text">Keeps: {{keeps.length}} <br> Vaults: {{vaults.length}}</p>
+        <p class="card-text">Keeps: {{keeps.length}}</p>
         <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
       </div>
     </div>

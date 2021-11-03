@@ -43,6 +43,17 @@ namespace Keepr.Repositories
       SELECT
       *
       FROM vaults v
+      WHERE v.creatorId = @profileId AND isPrivate = 0
+      ";
+      return _db.Query<Vault>(sql, new { profileId }).ToList();
+    }
+
+    public List<Vault> GetVaultsByUser(string profileId)
+    {
+      string sql = @"
+      SELECT
+      *
+      FROM vaults v
       WHERE v.creatorId = @profileId
       ";
       return _db.Query<Vault>(sql, new { profileId }).ToList();
