@@ -1,27 +1,40 @@
 <template>
- <div class=" card rounded keepcard m-4">
-   <img :src="keep.img" class="card-img" style="" alt="..."/>
-   <div class="card-img-overlay">
+ <div class=" keepcard m-3">
+   <img :src="keep.img" class="card-img-top keepimage" style="max-width: 40rem" alt="..." />
+     <div class="card-img-overlay">
   <div
-        class="float-top on-hover action"
+        class="float-end on-hover action"
         v-if="keep.creatorId == account.id"
       >
         <i class="mdi mdi-delete text-danger" @click="deleteKeep()"></i>
+        <i
+          class="mdi mdi-lead-pencil"
+          data-bs-toggle="modal"
+          :data-bs-target="'#edit-keep-' + keep.id"
+        ></i>
       </div>
-      <div class="text-end textbot d-flex justify-content-between">
-      <h5 class="text-light action" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" @click="viewCount()">{{keep.name}}
+          <div class="text-end textbot d-flex justify-content-between">
+      <h5 class="card-text text-light action" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" @click="viewCount()">{{keep.name}}
       </h5>
         <router-link :to= "{ name: 'ProfilePage', params: { id: keep.creatorId } }">
       <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
         </router-link>
         </div>
-   </div>
-   </div>
- <Modal :id="'keep-modal-' + keep.id">
+ </div>
+ </div>
+   <Modal :id="'edit-keep-' + keep.id">
+    <template #modal-title>
+      <h6>Edit your keep!</h6>
+    </template>
+    <template #modal-body>
+      <KeepForm :keep="keep" />
+    </template>
+  </Modal>
+   <Modal :id="'keep-modal-' + keep.id">
     <template #modal-body>
   <div class="row g-0">
     <div class="col-md-8">
-      <img :src="keep.img" style="max-width: 28rem" alt="...">
+      <img :src="keep.img" style="max-width: 40rem" alt="...">
     </div>
     <div class="col-md-3">
       <div class="card-body border-bottom border-secondary">
@@ -76,10 +89,6 @@ export default {
   setup(props){
     return {
     account: computed(() => AppState.account),
-    vault: computed(() => AppState.vault),
-    vaults: computed(() => AppState.vaults),
-    usersvaults: computed(() => AppState.usersvaults),
-    vaultkeeps: computed(() => AppState.vaultkeeps),
     async deleteKeep(){
       try {
         if(await Pop.confirm()){
@@ -90,24 +99,7 @@ export default {
         Pop.toast(error.message, 'error')
         logger.log(error)
       }
-    },
-       async addToVault(vaultId){
-        try {
-          let vaultkeeps = {
-            keepId: props.keep.id,
-            vaultId: vaultId
-          };
-          await keepsService.addVaultKeep(vaultkeeps)
-          Pop.toast('Keep has been added to vault')
-        } catch (error) {
-          Pop.toast(error.message, 'error')
-          logger.log(error)
-        }
-        },
-         async viewCount(){
-          props.keep.views++
-          await keepsService.getById(props.keep.id)
-      }
+    }
     }
   }
 }
@@ -120,9 +112,7 @@ export default {
   height: 2.5rem;
   width: 2.5rem;
 }
-.keepcard{
-  background-color: black;
-}
+
 .textbot{
   position: absolute;
   bottom: 0;

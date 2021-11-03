@@ -13,8 +13,6 @@ class KeepsService{
   }
   async getById(keepId){
     const res = await api.get(`api/keeps/${keepId}`)
-    logger.log('getById res', res)
-    AppState.keep = new Keep(res.data)
   }
   async createKeep(keepData){
     const res = await api.post('api/keeps', keepData)

@@ -1,17 +1,24 @@
 <template>
 <div class="container-fluid">
-    <div class="mb-3 pt-4 ps-3" style="max-width: 540px;">
   <div class="row g-0">
-    <div class="col-12">
-    <Keep 
+    <div class="col-md-8">
+      <div class="card-body">
+  <h1 class="card-title" v-for="v in vault" :vault="v" :key="v.id">{{vault.name}}
+  </h1>
+        <p class="card-text">Keeps: {{keeps.length}} <br> Vaults: {{vaults.length}}</p>
+        <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid masonry">
+    <VaultKeeps 
   v-for="k in keeps"
   :key="k.id"
   :keep="k"
   />
   </div>
-  </div>
-  </div>
-  </div>
+
 </template>
 
 
@@ -47,5 +54,26 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+body {
+  margin: 0;
+  padding: 1rem;
+}
 
+.masonry{
+  padding: 1em;
+  columns: 4;
+  break-inside: avoid;
+  display: inline-block;
+img{width: 100%;
+margin-bottom: 1em;
+}
+}
+@media(max-width: 800px){
+  .masonry{
+    column-count: 1;
+  }
+}
+.container-fluid{
+  background-color: black;
+}
 </style>

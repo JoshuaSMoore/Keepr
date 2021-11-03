@@ -1,16 +1,13 @@
 <template>
-<div class="container-fluid ">
-  <div class="row">
-    <div class="col-12 masonry">
+<div class="container-fluid masonry">
 
   <Keep 
   v-for="k in keeps"
   :key="k.id"
   :keep="k"
   />
+
     </div>
-</div>
-  </div>
    <Modal id="keep-modal">
     <template #modal-title>
     </template>
@@ -52,11 +49,10 @@ return {
   padding: 1em;
   columns: 4;
   break-inside: avoid;
-  grid-template-rows: 1fr auto;
   display: inline-block;
-}
 img{width: 100%;
 margin-bottom: 1em;
+}
 }
 @media(max-width: 800px){
   .masonry{
