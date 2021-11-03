@@ -3,7 +3,7 @@
   <div class="row g-0">
     <div class="col-md-8">
       <div class="card-body">
-  <h1 class="card-title" v-for="v in vault" :vault="v" :key="v.id">{{vault.name}}
+  <h1 class="card-title">{{vault.name}}
   </h1>
         <p class="card-text">Keeps: {{keeps.length}}</p>
         <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
@@ -23,18 +23,24 @@
 
 
 <script>
-import {  computed, onMounted } from '@vue/runtime-core'
+import {  computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { vaultsService } from '../services/VaultsService.js'
 import { AppState } from '../AppState.js'
 import Pop from "../utils/Pop"
 import { useRoute } from "vue-router"
 import { Keep } from '../Models/Keep.js'
 import { Vault } from '../Models/Vault.js'
+import { keepsService } from '../services/KeepsService.js'
 export default {
-
-  setup(){
+ props: {
+    keep: {
+      type: Object,
+      default: () => new Keep()
+    }
+  },
+  setup(props){
     const route = useRoute()
-    onMounted(() => {
+    watchEffect(() => {
         try {
          vaultsService.getVault(route.params.id)
          vaultsService.getKeepByVault(route.params.id)
@@ -49,6 +55,8 @@ export default {
     user: computed(() => AppState.user),
     vaults: computed(() => AppState.vaults),
     vault: computed(() => AppState.vault),
+    vaultkeeps: computed(() => AppState.vaultKeepId),
+    vaultkeep: computed(() => AppState.vaultkeep)
   }
 }
 }

@@ -83,16 +83,18 @@ export default {
   props: {
     keep: {
       type: Object,
-      default: () => new Keep()
+      // default: () => new Keep()
+      required: true
     }
   },
   setup(props){
     return {
     account: computed(() => AppState.account),
     async deleteKeep(){
+  
       try {
         if(await Pop.confirm()){
-          await keepsService.deleteKeep(props.keep.id)
+          await keepsService.deleteVaultKeep(props.keep.vaultKeepId)
           Pop.toast('Keep has been deleted')
         }
       } catch (error) {

@@ -1,15 +1,15 @@
 <template>
  <div class=" card rounded keepcard m-4">
-   <img :src="keep.img" class="card-img" style="" alt="..."/>
-   <div class="card-img-overlay">
   <div
-        class="float-top on-hover action"
+        class="on-hover action delete"
         v-if="keep.creatorId == account.id"
       >
         <i class="mdi mdi-delete text-danger" @click="deleteKeep()"></i>
       </div>
-      <div class="text-end textbot d-flex justify-content-between">
-      <h5 class="text-light action" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" @click="viewCount()">{{keep.name}}
+   <img :src="keep.img" class="card-img " :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" @click="viewCount()" style="" alt="..."/>
+   <div class="card-img-overlay selectable">
+      <div class="text-end textbot">
+      <h5 class="text-light card-text"> {{keep.name}}
       </h5>
         <router-link :to= "{ name: 'ProfilePage', params: { id: keep.creatorId } }">
       <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
@@ -19,17 +19,16 @@
    </div>
  <Modal :id="'keep-modal-' + keep.id">
     <template #modal-body>
-  <div class="row g-0">
+  <div class="row pe-5 me-1">
     <div class="col-md-8">
       <img :src="keep.img" style="max-width: 28rem" alt="...">
     </div>
-    <div class="col-md-3">
-      <div class="card-body border-bottom border-secondary">
-        <h5 class="card-title">{{ keep.name }}</h5>
-        <p class="card-text"><small class="text-muted">Shares: {{keep.shares}}<br> Views: {{keep.views}} </small></p>
-        <p class="card-text">Keeps: {{keep.description}} </p>
+    <div class="col-md-3 pe-5">
+      <div class="card-body border-bottom border-secondary text-center modaltop">
+        <h2 class="card-title">{{ keep.name }}</h2>
+        <p class="card-text"><small class="text-muted">Keeps: {{keep.keeps}}<br> Views: {{keep.views}} </small></p>
       </div>
-      <div class="row justify-content-around">   
+        <h5 class="card-text pt-3"><small> <b> Description: </b> </small> <br> {{keep.description}} </h5>
       <div class="modaltext d-flex">
         
    <div class="dropdown">
@@ -47,10 +46,10 @@
             </li>
           </ul>
         </div>
+        <h5>
        <img :src="keep.creator.picture" class="rounded-circle profilepic ms-5" alt="" />
-       <h5>{{keep.creator.name}}</h5>
+       {{keep.creator.name}}</h5>
       </div>
-       </div>
     </div>
 </div>
     </template>
@@ -121,21 +120,25 @@ export default {
   height: 2.5rem;
   width: 2.5rem;
 }
+
 .keepcard{
   background-color: black;
 }
 .textbot{
   position: absolute;
-  bottom: 0;
+  bottom: 3.5rem;
   left: 0;
   right: 0;
   padding: 0.5rem;
 }
+.delete{
+  transform: translateY(0rem);
+}
 .modaltext{
  position: absolute;
   bottom: 0;
-  // left: 0;
-  right: -45rem;
+  left: 40rem;
+  right: 0rem;
   padding: 0.5rem;
 }
 @media (max-width: 800px) {
@@ -146,6 +149,7 @@ export default {
 .card-img{
   position: relative;
 }
+
 
 
 
