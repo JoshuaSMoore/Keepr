@@ -2,8 +2,10 @@ import { AppState } from "../AppState"
 import { Keep } from "../Models/Keep.js"
 import { Vault } from "../models/Vault.js"
 import { VaultKeep } from "../Models/VaultKeep.js"
+import { router } from "../router.js"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
+
 
 
 class VaultsService {
@@ -32,9 +34,14 @@ async createVault(vaultData){
 }
 async getKeepByVault(vaultId){
   AppState.keeps = []
-  const res = await api.get(`api/vaults/${vaultId}/keeps`)
-  logger.log('keeps res', res)
-  AppState.keeps = res.data.map(keep => new Keep(keep))
+  try {
+    const res = await api.get(`api/vaults/${vaultId}/keeps`)
+    AppState.keeps = res.data.map(keep => new Keep(keep))
+    logger.log('keeps res', res)
+  } catch (error) {
+    
+    router.push({ name: 'Home'})
+  }
 }
 }
 export const vaultsService = new VaultsService()

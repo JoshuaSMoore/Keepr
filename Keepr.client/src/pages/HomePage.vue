@@ -1,19 +1,12 @@
 <template>
-<div class="container-fluid masonry">
+<div class="masonry">
 
   <Keep 
   v-for="k in keeps"
   :key="k.id"
   :keep="k"
   />
-
     </div>
-   <Modal id="keep-modal">
-    <template #modal-title>
-    </template>
-    <template #modal-body>
-    </template>
-  </Modal>
 </template>
 
 <script>
@@ -47,26 +40,17 @@ return {
 
 .masonry {
   columns: 4 200px;
-  column-gap: .1rem;
+  column-gap:2rem;
   padding-top: 2rem;
+  width: 100%;
+  padding: 1rem;
   div {
-    width: 150px;
-    background: #EC985A;
+    width: 100px;
+    background: black;
     color: white;
     margin: 0 1rem 1rem 0;
     display: inline-block;
     width: 100%;
-    text-align: center;
-    font-family: system-ui;
-    font-weight: 900;
-    font-size: 2rem;
-  } 
-  @for $i from 1 through 36 { 
-    div:nth-child(#{$i}) {
-      $h: (random(400) + 100) + px;
-      height: $h;
-      line-height: $h;
-    }
   }
   }
 .container-fluid{

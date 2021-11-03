@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row g-0">
     <div class="col-md-8">
-      <div class="card-body">
+      <div class="card-body text-light">
   <h1 class="card-title">{{vault.name}}
   </h1>
         <p class="card-text">Keeps: {{keeps.length}}</p>
@@ -11,7 +11,7 @@
     </div>
   </div>
 </div>
-<div class="container-fluid masonry">
+<div class="masonry">
     <VaultKeeps 
   v-for="k in keeps"
   :key="k.id"
@@ -27,10 +27,11 @@ import {  computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { vaultsService } from '../services/VaultsService.js'
 import { AppState } from '../AppState.js'
 import Pop from "../utils/Pop"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter} from "vue-router"
 import { Keep } from '../Models/Keep.js'
 import { Vault } from '../Models/Vault.js'
 import { keepsService } from '../services/KeepsService.js'
+import { router } from '../router.js'
 export default {
  props: {
     keep: {
@@ -40,16 +41,19 @@ export default {
   },
   setup(props){
     const route = useRoute()
+    const router = useRouter()
     watchEffect(() => {
         try {
          vaultsService.getVault(route.params.id)
          vaultsService.getKeepByVault(route.params.id)
         } catch (error) {
+          router.push({ name: 'Home'})
           Pop.toast(error.message, 'error')
         }
     })
     return {
       route,
+      router,
     keeps: computed(() => AppState.keeps),
     account: computed(() => AppState.account),
     user: computed(() => AppState.user),
@@ -62,25 +66,21 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-body {
-  margin: 0;
+.masonry {
+  columns: 3 200px;
+  column-gap: 2rem;
+  padding-top: 2rem;
+  width: 100%;
   padding: 1rem;
-}
-
-.masonry{
-  padding: 1em;
-  columns: 4;
-  break-inside: avoid;
-  display: inline-block;
-img{width: 100%;
-margin-bottom: 1em;
-}
-}
-@media(max-width: 800px){
-  .masonry{
-    column-count: 1;
+  div {
+    width: 150px;
+    background: black;
+    color: white;
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
   }
-}
+  }
 .container-fluid{
   background-color: black;
 }

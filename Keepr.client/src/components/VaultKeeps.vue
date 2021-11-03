@@ -1,26 +1,20 @@
 <template>
- <div class=" keepcard m-3">
-   <img :src="keep.img" class="card-img-top keepimage" style="max-width: 40rem" alt="..." />
-     <div class="card-img-overlay">
+ <div class="card rounded">
   <div
-        class="float-end on-hover action"
-        v-if="keep.creatorId == account.id"
+        class="on-hover action delete"
+        v-if="vault.creatorId == account.id"
       >
         <i class="mdi mdi-delete text-danger" @click="deleteKeep()"></i>
-        <i
-          class="mdi mdi-lead-pencil"
-          data-bs-toggle="modal"
-          :data-bs-target="'#edit-keep-' + keep.id"
-        ></i>
       </div>
-          <div class="text-end textbot d-flex justify-content-between">
-      <h5 class="card-text text-light action" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" @click="viewCount()">{{keep.name}}
+   <img :src="keep.img" class="card-img " :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" @click="viewCount()" style="" alt="..."/>
+   <div class="card-img-overlay selectable">
+      <div class="text-end textbot">
+      <h5 class="text-light card-text"> {{keep.name}}
       </h5>
         <router-link :to= "{ name: 'ProfilePage', params: { id: keep.creatorId } }">
       <img :src="keep.creator.picture" class="rounded-circle profilepic" alt="" />
         </router-link>
         </div>
- </div>
  </div>
    <Modal :id="'edit-keep-' + keep.id">
     <template #modal-title>
@@ -39,7 +33,7 @@
     <div class="col-md-3">
       <div class="card-body border-bottom border-secondary">
         <h5 class="card-title">{{ keep.name }}</h5>
-        <p class="card-text"><small class="text-muted">Shares: {{keep.shares}}<br> Views: {{keep.views}} </small></p>
+        <p class="card-text"><small class="text-muted">Shares: {{keep.keeps}}<br> Views: {{keep.views}} </small></p>
         <p class="card-text">Keeps: {{keep.description}} </p>
       </div>
       <div class="row justify-content-around">   
@@ -68,6 +62,7 @@
 </div>
     </template>
   </Modal>
+ </div>
 </template>
 
 
@@ -90,6 +85,8 @@ export default {
   setup(props){
     return {
     account: computed(() => AppState.account),
+    vault: computed(()=> AppState.vault),
+
     async deleteKeep(){
   
       try {
@@ -101,10 +98,14 @@ export default {
         Pop.toast(error.message, 'error')
         logger.log(error)
       }
+    },
+       async viewCount() {
+        props.keep.views++
+        await keepsService.getById(props.keep.id)
+      }
     }
     }
   }
-}
 </script>
 
 
@@ -113,14 +114,6 @@ export default {
 .profilepic{
   height: 2.5rem;
   width: 2.5rem;
-}
-
-.textbot{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0.5rem;
 }
 .modaltext{
  position: absolute;

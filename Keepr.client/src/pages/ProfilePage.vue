@@ -1,13 +1,13 @@
 <template>
-<div class="container-fluid">
+<div class="container-fluid" v-if="profile">
     <div class=" pt-4 ps-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-      <img :src="account.picture" class="img-fluid rounded-start" alt="...">
+      <img :src="profile.picture" class="img-fluid rounded-start" alt="...">
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">{{ account.name }}</h5>
+        <h5 class="card-title">{{ profile.name }}</h5>
         <p class="card-text">Keeps: {{keeps.length}} <br> Vaults: {{vaults.length}}</p>
         <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
       </div>
@@ -59,7 +59,7 @@ import {  computed, onMounted } from '@vue/runtime-core'
 import { profilesService } from '../services/ProfilesService.js'
 import { AppState } from '../AppState.js'
 import Pop from "../utils/Pop"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 export default {
   setup(){
     const route = useRoute()
@@ -78,6 +78,7 @@ export default {
     account: computed(() => AppState.account),
     user: computed(() => AppState.user),
     vaults: computed(() => AppState.vaults),
+    profile: computed(()=> AppState.profile)
   }
 }
 }
