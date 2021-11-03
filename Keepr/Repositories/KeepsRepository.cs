@@ -79,5 +79,22 @@ namespace Keepr.Repositories
         return k;
       }, new { id }).FirstOrDefault();
     }
+    public void KeepsCounter(int id, int keeps)
+    {
+      string sql = @"
+      UPDATE keeps SET
+      keeps = keeps + @keeps
+      WHERE id = @id LIMIT 1;
+      ";
+      _db.Execute(sql, new { id, keeps });
+    }
+    public void KeepsViews(int id){
+      string sql = @"
+      UPDATE keeps SET
+      views = views + 1
+      WHERE id = @id LIMIT 1;
+      ";
+      _db.Execute(sql, new { id });
+    }
+    }
   }
-}

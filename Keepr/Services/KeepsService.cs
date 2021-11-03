@@ -24,6 +24,8 @@ namespace Keepr.Services
       {
         throw new Exception("Invalid Id");
       }
+      _keepsRepository.KeepsViews(keepId);
+      foundKeep.Views ++;
       return foundKeep;
     }
 

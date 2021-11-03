@@ -9,13 +9,17 @@ namespace Keepr.Services
     private readonly VaultKeepsRepository _vaultKeepsRepository;
     private readonly VaultsRepository _vaultsRepository;
 
-    public VaultKeepsService(VaultKeepsRepository vaultKeepsRepository, VaultsRepository vaultsRepository)
+    private readonly KeepsRepository _keepsRepository;
+
+    public VaultKeepsService(VaultKeepsRepository vaultKeepsRepository, VaultsRepository vaultsRepository, KeepsRepository keepsRepository)
     {
       _vaultKeepsRepository = vaultKeepsRepository;
       _vaultsRepository = vaultsRepository;
+      _keepsRepository = keepsRepository;
     }
     public VaultKeep Post(VaultKeep vaultKeepData)
     {
+      _keepsRepository.KeepsCounter(vaultKeepData.KeepId, 1);
       return _vaultKeepsRepository.Create(vaultKeepData);
     }
 
