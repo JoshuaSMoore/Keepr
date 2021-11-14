@@ -1,5 +1,5 @@
 <template>
-  <div class="card rounded keepcard">
+  <div class="rounded keepcard">
     <div class="on-hover action delete" v-if="keep.creatorId == account.id">
       <i class="mdi mdi-delete text-danger" @click="deleteKeep()"></i>
     </div>
